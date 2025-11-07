@@ -1,0 +1,48 @@
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat-regular: "Montserrat", sans-serif;
+  --font-montserrat-bold: "Montserrat", sans-serif;
+
+  --color-secondary: #6b7280; /* refined neutral gray */
+  --color-teal-light: #a0f0df; /* softer teal for emoji bubble */
+  --color-photopicker-overlay-background: rgba(30, 42, 49, 0.8);
+  --color-dropdown-background: #f4f4f4;
+  --color-dropdown-background-hover: #e5e5e5;
+  --color-input-background: #f9fafb; /* very light gray input background */
+  --color-primary-strong: #0f172a; /* dark navy for strong text */
+  --color-panel-header-background: #ffffff; /* pure white panel */
+  --color-panel-header-icon: #64748b; /* subtle dark gray icon */
+  --color-icon-lighter: #94a3b8;
+  --color-icon-green: #10b981; /* tailwind's emerald-500 */
+  --color-search-input-container-background: #f1f5f9; /* light neutral */
+  --color-conversation-border: rgba(148, 163, 184, 0.2); /* very soft border */
+  --color-conversation-panel-background: #ffffff; /* clean white bg */
+  --color-background-default-hover: #f3f4f6;
+  --color-incoming-background: #e5e7eb; /* light gray bubble */
+  --color-outgoing-background: #3b82f6; /* blue-500 bubble */
+  --color-bubble-meta: hsla(0, 0%, 100%, 0.6); /* same */
+  --color-icon-ack: #38bdf8; /* sky-400 */
+  --color-panel-header-background-icon: #64748b;
+  --background-image-chat-background: url('/chat-bg.png');
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: aliceblue;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.no-scroll{overflow: hidden; height: 100%;}
