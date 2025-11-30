@@ -29,15 +29,18 @@ const RecentChatList = () => {
 
   return (
     <div
-      className="font-montserrat-regular sm:w-full border-r border-gray-100 bg-gray-100 sm:h-[calc(100vh-11rem)] pt-[7rem] pb-7 sm:pt-0 sm:pb-0   "
-      style={{
-        maxHeight: "calc(100vh - 4rem)",
-        overflowY: "auto",
-      }}
+      // className="font-montserrat-regular sm:w-full border-r border-black bg-gray-100 sm:h-[calc(100vh-7rem)] h-[100dvh] pt-20 pb-7 sm:pt-16 sm:pb-0 "
+      // style={{
+      //   maxHeight: "calc(100vh - 4rem)",
+      //   overflowY: "auto",
+      // }}
+
+      className="font font-montserrat-regular w-full bg-gray-200 z-50 border-r border-black h-[calc(100dvh-100px)] pt-20 mt-24 sm:mt-0 sm:text-lg text-sm
+  overflow-y-auto"
     >
       {recent.map((r) => (
         <div key={r.roomId} 
-        className="sm:p-3 pb-3 pl-4 hover:bg-gray-200"
+        className="sm:p-3 sm:pb-5 pb-5 pl-4 hover:bg-gray-200"
         onClick={()=>navigate(`/chat/${r.otherUser._id}`)}
         >
           <span className="font-bold">@{r.otherUser.username}</span>

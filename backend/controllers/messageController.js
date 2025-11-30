@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import Message from "../models/Messages.js";
 import Room from "../models/Room.js";
 import User from "../models/User.js";
+import * as trieService from "../services/trieService.js";
+import { tokenize } from "../utils/tokenize.js";
 
 
 // Utility function to create or find DM room between two users .
@@ -190,6 +192,9 @@ export const sendMessage = async (req, res) => {
       content,
     });
 
+    //Trie for prredictions
+    await trieService.insert(roomId , content);
+
     // update room's last message info
     await Room.updateOne(
       { _id: roomId },
@@ -209,5 +214,43 @@ export const sendMessage = async (req, res) => {
   } catch (error) {
     console.error("Error sending message :", error);
     res.status(500).json({ error: "Failed to send message" });
+  }
+};
+
+export const predictNextWords = async (req,res) =>{
+  try {
+    const {roomId} = req.params;
+    const {prefix} = req.query;
+    const userId = req.userId;
+
+    if(!prefix || prefix.trim() === ""){
+      return res.status(200).json({suggestions: [] });
+    }
+
+    const room = await Room.findOne({
+      _id : roomId,
+      participants:userId,
+    });
+
+    if(!room){
+      return res.status(403).json({error:"Access Denied"});
+    }
+
+    // tokenize prefix text
+    const prefixTokens = tokenize(prefix);
+
+    if(prefixTokens.length === 0){
+      return res.status(200).json({suggestions:[]});
+    }
+
+    const trie = await trieService.loadTrie(roomId);
+
+    const suggestions = trie.predict(prefixTokens).slice(0,3);
+
+    res.status(200).json({suggestions});
+
+  } catch (error) {
+    console.error("Prediction Error " , error);
+    res.status(500).json({error : "Failed to predict next words"});
   }
 };

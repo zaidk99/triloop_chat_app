@@ -2,6 +2,7 @@ import Message from "../models/Messages.js";
 import Room from "../models/Room.js";
 import User from "../models/User.js";
 import { getOrCreateDMRoom } from "../controllers/messageController.js";
+import * as trieService from "../services/trieService.js";
 
 export const socketManager = (io)=>{
   io.on("connection",(socket)=>{
@@ -40,6 +41,8 @@ export const socketManager = (io)=>{
           sender : userId ,
           content,
         });
+
+        await trieService.insert(roomId,content);
 
         // update room last message info 
 

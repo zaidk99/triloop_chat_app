@@ -129,6 +129,7 @@ const Chat = () => {
         messages={messages}
         onSend = {sendMessage}
         otherUser = {otherUser}
+        roomId = {roomId}
       />
     </div>
   );

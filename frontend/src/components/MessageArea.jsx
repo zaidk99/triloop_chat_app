@@ -66,7 +66,7 @@ const MessageArea = ({ messages }) => {
         backgroundImage: "url('/chat-bg.png')",
         backgroundRepeat: "repeat",
         backgroundPosition: "center",
-        paddingTop: "2rem",
+        paddingTop: "5rem",
         paddingBottom: `${bottomPadding}px`,
       }}
     >
@@ -83,7 +83,7 @@ const MessageArea = ({ messages }) => {
             className={`flex ${isMe ? "justify-end" : "justify-start"}`}
           >
             <div
-              className={`max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg text-white break-words whitespace-pre-wrap ${
+              className={`max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg px-4 py-2 rounded-lg text-white break-words whitespace-pre-wrap sm:text-lg text-sm ${
                 isMe ? "bg-blue-500" : "bg-gray-700"
               }`}
             >

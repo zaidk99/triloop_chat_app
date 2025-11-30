@@ -6,6 +6,9 @@ import {
   sendMessage,
   getOrCreateDMRoom,
 } from "../controllers/messageController.js";
+import { predictNextWords } from "../controllers/messageController.js";
+import { predictLimiter } from "../middleware/ratelimiter.js";
+
 
 const router = express.Router();
 
@@ -15,11 +18,15 @@ router.use(verifyToken);
 // get /api/messages/recent get recent chats for the user
 router.get("/recent", getRecentChats);
 
+router.get("/:roomId/predict", predictLimiter ,predictNextWords);
+
 // /api/messages/:roomId - get messages for specific room
 router.get("/:roomId", getMessages);
 
 // POST /api/messages/send
 router.post("/send", sendMessage);
+
+
 
 // POST /api/messages/room/create - Create or get DM room between users
 router.post("/room/create", async (req, res) => {
