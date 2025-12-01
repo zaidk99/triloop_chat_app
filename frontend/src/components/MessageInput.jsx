@@ -18,7 +18,7 @@ const MessageInput = ({ roomId, onSend }) => {
     onSend?.(text);
     setText("");
   };
-  const textareaRef = useRef(null);
+
   const dispatch = useDispatch();
 
   // auto resize
@@ -92,6 +92,17 @@ const MessageInput = ({ roomId, onSend }) => {
   return (
     <form onSubmit={submit}>
       <div className="fixed bottom-0 sm:w-3/4 w-full px-4 py-2 bg-white border-t  border-gray-300 flex items-end gap-3 font-montserrat-regular  ">
+
+     {ghostText && (
+      <div
+      className="absolute top-0 left-0 pointer-events-none text-gray-400 px-3 py-2 whitespace-pre-wrap"
+      style={{
+        fontSize:"16px",
+        lineHeight:"20px",
+      }}>
+        {ghostText}
+      </div>
+     )}
         <textarea
           ref={textareaRef}
           value={text}
