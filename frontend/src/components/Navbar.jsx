@@ -89,7 +89,7 @@ const Navbar = () => {
     isMdUp && location.pathname !== "/dashboard";
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white text-black font-montserrat-regular flex items-center justify-between px-4 py-3 sm:px-8 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white text-black font-montserrat-regular flex items-center justify-between px-4 py-3 sm:px-8 z-[60]">
       {/* Logo */}
       <div className="flex shrink-0 mr-4">
         <Link to="/dashboard" className="flex items-center gap-2 font-bold">
@@ -107,11 +107,12 @@ const Navbar = () => {
             type="text"
             value={q}
             onChange={(e) => setQ(e.target.value)}
+            onBlur={() => setTimeout(()=> setResults([]) , 150 )}
             placeholder="Search users..."
             className="w-full px-3 py-1.5 sm:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm focus:shadow-md"
           />
           {results.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-md shadow max-h-80 overflow-y-auto z-50">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-white border rounded-md shadow max-h-80 overflow-y-auto z-[60]">
               {results.map((u) => {
                 const relation = u.relation;
                 return (
@@ -192,7 +193,7 @@ const Navbar = () => {
         {menuOpen && (
           <div
             ref={menuRef}
-            className="absolute right-3 top-14 bg-white rounded-2xl p-3 w-48 sm:w-52 sm:text-sm text-xs z-50 space-y-2 cursor-pointer shadow-[0_10px_25px_rgba(0,0,0,0.65)] transition-transform duration-200 ease-in-out scale-95 origin-top-right"
+            className="absolute right-3 top-14 bg-white rounded-2xl p-3 w-48 sm:w-52 sm:text-sm text-xs z-[60] space-y-2 cursor-pointer shadow-[0_10px_25px_rgba(0,0,0,0.65)] transition-transform duration-200 ease-in-out scale-95 origin-top-right"
           >
             <div className="space-y-2">
               <div className="hover:bg-gray-100 p-2 rounded-lg">

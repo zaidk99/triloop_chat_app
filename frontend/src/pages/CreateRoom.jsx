@@ -75,7 +75,7 @@ const CreateRoom = () => {
           }}
         >
           <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-center bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent ">
-            Create Chat Room
+            Create Chat Room 
           </h2>
           <form
             onSubmit={handleSubmit}

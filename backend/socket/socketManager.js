@@ -14,24 +14,27 @@ export const socketManager = (io)=>{
       socket.to(roomId).emit("user-joined" , {userId , socketId : socket.id});
     });
 
-    socket.on("join-dm",async ({otherUserId , userId})=>{
-      try {
-        const room = await getOrCreateDMRoom(userId , otherUserId);
-        const roomId = room._id.toString();
+    // socket.on("join-dm",async ({otherUserId , userId})=>{
+    //   try {
+    //     const room = await getOrCreateDMRoom(userId , otherUserId);
+    //     const roomId = room._id.toString();
 
-        socket.join(roomId);
-        console.log(`User ${userId} Joined Dm room ${roomId} with ${otherUserId}`);
+    //     socket.join(roomId);
+    //     console.log(`User ${userId} Joined Dm room ${roomId} with ${otherUserId}`);
 
-        socket.to(roomId).emit("user-joined-dm",{
-          userId,
-          roomId,
-          room: room
-        });
-      } catch (error) {
-        console.error("error joining the DM : " , error);
-        console.error("error",{message: "Failed to join DM ROOM"});
-      }
-    });
+    //     socket.to(roomId).emit("user-joined-dm",{
+    //       userId,
+    //       roomId,
+    //       room: room
+    //     });
+    //   } catch (error) {
+    //     console.error("error joining the DM : " , error);
+    //     console.error("error",{message: "Failed to join DM ROOM"});
+    //   }
+    // });
+    io.of("/").adapter.on("join-room", (room, id) => {
+  console.log(`Socket ${id} joined room ${room}`);
+});
 
     socket.on("send-message",async({roomId,userId,content})=>{
       try {
@@ -55,10 +58,10 @@ export const socketManager = (io)=>{
         );
 
         // get user data
-        const user = await user.findById(userId).select("username fullName _id");
+        const user = await User.findById(userId).select("username fullName _id");
 
         const populated = await Message.findById(messageDoc._id).populate(
-          "sender " ,
+          "sender" ,
           "_id fullName username" 
       );
 
@@ -69,11 +72,11 @@ export const socketManager = (io)=>{
 
         // broadcast message to the room 
 
-        io.to(roomId).emit("recent-chat-update",{
+        io.to(roomId).emit("recent-chat-updated",{
           roomId,
           lastMessage:{
             content,
-            time:message.createdAt,
+            time : messageDoc.createdAt,
             sender:userId,
           }
         });

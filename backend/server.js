@@ -14,6 +14,7 @@ import { verifyToken } from "./middleware/authMiddleware.js";
 import friendRoutes from "./routes/friendRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 
+
 dotenv.config();
 const app = express();
 
@@ -43,11 +44,23 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+
+const server = http.createServer(app);
+const io = new Server(server,{
+    cors : {
+      origin : process.env.CORS_ORIGIN,
+      credentials: true,
+    },
+});
+
+socketManager(io);
+
 // Register routes
 app.use("/api/auth", authRoutes);
 app.use("/api/rooms",roomRoutes);
 app.use("/api/friends" , friendRoutes);
-app.use("/api/messages",messageRoutes);
+app.use("/api/messages",messageRoutes(io));
+console.log("Message routes registered with io:", !!io);
 
 // 6. Test route
 app.post("/test", (req, res) => {
@@ -60,15 +73,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const server = http.createServer(app);
-const io = new Server(server,{
-    cors : {
-      origin : process.env.CORS_ORIGIN,
-      credentials: true,
-    },
-});
 
-socketManager(io);
 
 // 8. Start the server
 const PORT = process.env.PORT || 5050;

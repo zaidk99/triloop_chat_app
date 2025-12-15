@@ -19,12 +19,49 @@ const RecentChatList = () => {
     load();
   },[]);
 
+  // useEffect(()=>{
+  //   if(!socket)return ;
+  //   const onUpdated = () => load();
+  //   socket.on("recent-chat-updated",onUpdated);
+  //   return () => socket.off("recent-chat-updated",onUpdated);
+  // },[socket]);
+
   useEffect(()=>{
-    if(!socket)return ;
-    const onUpdated = () => load();
-    socket.on("recent-chat-updated",onUpdated);
-    return () => socket.off("recent-chat-updated",onUpdated);
-  },[socket]);
+  if(!socket)return ;
+  
+  const onUpdated = (data) => {
+    // Instead of reloading all, update just the changed room
+    setRecent((prev) => {
+      const updated = [...prev];
+      const index = updated.findIndex(r => r.roomId === data.roomId);
+      
+      if (index !== -1) {
+        // Update existing room
+        updated[index] = {
+          ...updated[index],
+          lastMessage: {
+            content: data.lastMessage.content,
+            time: data.lastMessage.time,
+            sender: data.lastMessage.sender,
+          },
+          lastMessageTime: data.lastMessage.time,
+        };
+        // Move to top (most recent)
+        const [moved] = updated.splice(index, 1);
+        return [moved, ...updated];
+      } else {
+        // New room - reload to get full data
+        load();
+        return prev;
+      }
+    });
+  };
+  
+  socket.on("recent-chat-updated", onUpdated);
+  return () => socket.off("recent-chat-updated", onUpdated);
+},[socket]);
+
+
 
 
   return (

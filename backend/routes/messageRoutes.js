@@ -6,44 +6,53 @@ import {
   sendMessage,
   getOrCreateDMRoom,
 } from "../controllers/messageController.js";
+
 import { predictNextWords } from "../controllers/messageController.js";
-import { predictLimiter } from "../middleware/ratelimiter.js";
+import { predictLimiter } from "../middleware/rateLimiter.js";
 
+const messageRoutes = (io) => {
+  const router = express.Router();
 
-const router = express.Router();
+  router.use(verifyToken);
+  // router.post("/send", (req, res) => {
+  //    console.log("Route /send hit, calling sendMessage");
+  //   sendMessage(req, res, io)
+  // });
 
-// making sure all routes needs authentication here
-router.use(verifyToken);
-
-// get /api/messages/recent get recent chats for the user
-router.get("/recent", getRecentChats);
-
-router.get("/:roomId/predict", predictLimiter ,predictNextWords);
-
-// /api/messages/:roomId - get messages for specific room
-router.get("/:roomId", getMessages);
-
-// POST /api/messages/send
-router.post("/send", sendMessage);
-
-
-
-// POST /api/messages/room/create - Create or get DM room between users
-router.post("/room/create", async (req, res) => {
+  router.post("/send", async (req, res) => {
+  console.log("POST /send route hit");
   try {
-    const { otherUserId } = req.body;
-    const currentUserId = req.userId;
-
-    if (!otherUserId) {
-      return res.status(400).json({ error: "otherUserId is required" });
-    }
-
-    const room = await getOrCreateDMRoom(currentUserId, otherUserId);
-    res.status(200).json({ room });
+    await sendMessage(req, res, io);
   } catch (error) {
-    console.error("Error creating/getting DM room:", error);
-    res.status(500).json({ error: "Failed to create/get room" });
+    console.error("Error in send route handler:", error);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Failed to send message" });
+    }
   }
 });
 
-export default router;
+  router.get("/recent", getRecentChats);
+  router.get("/:roomId/predict", predictLimiter, predictNextWords);
+
+  router.get("/:roomId", getMessages);
+
+  router.post("/room/create", async (req, res) => {
+    try {
+      const { otherUserId } = req.body;
+      const currentUserId = req.userId;
+
+      if (!otherUserId) {
+        return res.status(400).json({ error: "otherUserId is required" });
+      }
+
+      const room = await getOrCreateDMRoom(currentUserId, otherUserId);
+      res.status(200).json({ room });
+    } catch (error) {
+      console.error("Error creating / getting DM room ", error);
+      res.status(500).json({ error: "Failed to create/get DM room " });
+    }
+  });
+  return router;
+};
+
+export default messageRoutes;
