@@ -4,7 +4,12 @@ import User from "../models/User.js";
 import { getOrCreateDMRoom } from "../controllers/messageController.js";
 import * as trieService from "../services/trieService.js";
 
+
+
 export const socketManager = (io)=>{
+
+  const onlineUsers = new Map();
+
   io.on("connection",(socket)=>{
     console.log("User Connected :" , socket.id);
 
@@ -13,28 +18,11 @@ export const socketManager = (io)=>{
       console.log(`User ${userId} joined room ${roomId}`);
       socket.to(roomId).emit("user-joined" , {userId , socketId : socket.id});
     });
-
-    // socket.on("join-dm",async ({otherUserId , userId})=>{
-    //   try {
-    //     const room = await getOrCreateDMRoom(userId , otherUserId);
-    //     const roomId = room._id.toString();
-
-    //     socket.join(roomId);
-    //     console.log(`User ${userId} Joined Dm room ${roomId} with ${otherUserId}`);
-
-    //     socket.to(roomId).emit("user-joined-dm",{
-    //       userId,
-    //       roomId,
-    //       room: room
-    //     });
-    //   } catch (error) {
-    //     console.error("error joining the DM : " , error);
-    //     console.error("error",{message: "Failed to join DM ROOM"});
-    //   }
-    // });
     io.of("/").adapter.on("join-room", (room, id) => {
   console.log(`Socket ${id} joined room ${room}`);
 });
+
+
 
     socket.on("send-message",async({roomId,userId,content})=>{
       try {

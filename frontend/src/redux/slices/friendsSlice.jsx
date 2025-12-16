@@ -135,6 +135,7 @@ const friendSlice = createSlice({
           (r) => r.id !== requestId
         );
       });
+      
   },
 });
 
@@ -154,4 +155,4 @@ export const makeSelectRelationForUser = (userId) => (state) => {
   return "none";
 };
 
-export default friendSlice.reducer; 
+export default friendSlice.reducer;

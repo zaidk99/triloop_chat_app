@@ -14,6 +14,8 @@ import PrivateChats from "../pages/PrivateChats.jsx";
 import PublicRooms from "../pages/PublicRooms.jsx";
 
 export default function AppRouter() {
+
+  
   return (
     <BrowserRouter>
       <Routes>
