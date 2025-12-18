@@ -55,14 +55,14 @@ const io = new Server(server,{
 
 socketManager(io);
 
-// Register routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/rooms",roomRoutes);
 app.use("/api/friends" , friendRoutes);
 app.use("/api/messages",messageRoutes(io));
 console.log("Message routes registered with io:", !!io);
 
-// 6. Test route
+
 app.post("/test", (req, res) => {
   res.json({ message: "Test route works" });
 });
@@ -75,7 +75,7 @@ app.use((req, res, next) => {
 
 
 
-// 8. Start the server
+
 const PORT = process.env.PORT || 5050;
 server.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
