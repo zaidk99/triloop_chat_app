@@ -2,7 +2,7 @@ import React from "react";
 import { PiScribbleLoopThin } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Iofriendreq from "../components/iofriendreq";
+import Iofriendreq from "../components/iofriendreq.jsx";
 import { useSocket } from '../context/SocketContext';
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
