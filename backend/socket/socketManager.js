@@ -13,6 +13,13 @@ export const socketManager = (io)=>{
   io.on("connection",(socket)=>{
     console.log("User Connected :" , socket.id);
 
+    socket.on("user-connect" , (userId)=>{
+      socket.join(`user:${userId}`);
+      onlineUsers.set(userId,socket.id);
+      console.log(`User ${userId} joined personal room : user:${userId}`);
+    });
+
+
     socket.on("join-room", async ({roomId , userId})=> {
       socket.join(roomId);
       console.log(`User ${userId} joined room ${roomId}`);
@@ -76,6 +83,12 @@ export const socketManager = (io)=>{
 
     socket.on("disconnect",()=>{
       console.log("User disconnected :" , socket.id);
+      for(let [userId , socketId] of onlineUsers.entries()) {
+        if(socketId === socket.id){
+          onlineUsers.delete(userId);
+          break;
+        }
+      }
     });
-  })
-}
+  });
+};

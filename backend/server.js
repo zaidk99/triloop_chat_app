@@ -11,7 +11,7 @@ import http from "http";
 import {Server} from "socket.io";
 import { socketManager } from "./socket/socketManager.js";
 import { verifyToken } from "./middleware/authMiddleware.js";
-import friendRoutes from "./routes/friendRoutes.js";
+import {friendRoutes} from "./routes/friendRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 
 
@@ -58,7 +58,7 @@ socketManager(io);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/rooms",roomRoutes);
-app.use("/api/friends" , friendRoutes);
+app.use("/api/friends" , friendRoutes(io));
 app.use("/api/messages",messageRoutes(io));
 console.log("Message routes registered with io:", !!io);
 
@@ -72,8 +72,6 @@ app.use((req, res, next) => {
   console.log("No route matched for:", req.method, req.url);
   next();
 });
-
-
 
 
 const PORT = process.env.PORT || 5050;

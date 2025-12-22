@@ -23,8 +23,6 @@ class Trie {
         node.isEnd = true;
     }
 
-    
-
     predict(tokens){
         let node = this.root;
         for(const token of tokens){
