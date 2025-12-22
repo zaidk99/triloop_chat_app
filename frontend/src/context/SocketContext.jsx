@@ -33,7 +33,8 @@ export const SocketProvider = ({ children }) => {
   useEffect(() => {
     const s = io(import.meta.env.VITE_SOCKET_URL, {
       withCredentials: true,
-    });
+    }); 
+    
 
     s.on("connect", () => {
       console.log("✅ Socket CONNECTED:", s.id);
