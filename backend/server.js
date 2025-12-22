@@ -10,7 +10,6 @@ import roomRoutes from "./routes/roomRoutes.js";
 import http from "http";
 import {Server} from "socket.io";
 import { socketManager } from "./socket/socketManager.js";
-import { verifyToken } from "./middleware/authMiddleware.js";
 import {friendRoutes} from "./routes/friendRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 
@@ -63,16 +62,28 @@ app.use("/api/messages",messageRoutes(io));
 console.log("Message routes registered with io:", !!io);
 
 
-app.post("/test", (req, res) => {
-  res.json({ message: "Test route works" });
+// app.post("/test", (req, res) => {
+//   res.json({ message: "Test route works" });
+// });
+
+app.get("/health", (req, res) => {
+  res.json({ status: "OK" });
 });
 
+// app.use((req, res) => {
+//   console.log("No route matched for:", req.method, req.url);
+//   next();
+// });
 
-app.use((req, res, next) => {
-  console.log("No route matched for:", req.method, req.url);
-  next();
+
+app.use((req,res)=>{
+  res.status(404).json({message: "Route not found"});
+})
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal Server Error" });
 });
-
 
 const PORT = process.env.PORT || 5050;
 server.listen(PORT, () => {
