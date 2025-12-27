@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import React from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { PiScribbleLoopThin } from "react-icons/pi";
+import axiosInstance from "../utils/axiosInstance";
+import { tokenUtils } from "../utils/tokenUtils";
 
 const Signup = () => {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -28,11 +29,11 @@ const Signup = () => {
   const [errorEmail, setErrorEmail] = useState("");
   const [suggest, setSuggest] = useState([]);
 
-  useEffect(() => {
-    if (suggest.length > 0) {
-      console.log("Updated suggest state:", suggest);
-    }
-  }, [suggest]);
+  // useEffect(() => {
+  //   if (suggest.length > 0) {
+  //     console.log("Updated suggest state:", suggest);
+  //   }
+  // }, [suggest]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -51,19 +52,27 @@ const Signup = () => {
     setErrorEmail("");
     setSuggest([]);
     try {
-      const res = await axios.post(`${BASE_URL}/auth/signup`, form, {
-        withCredentials: true,
-      });
-      console.log("signup :", res.data);
+      // const res = await axios.post(`${BASE_URL}/auth/signup`, form, {
+      //   withCredentials: true,
+      // });
+
+      const res = await axiosInstance.post("/auth/signup", form);
+      tokenUtils.setAuth(res.data.token, res.data.user);
       navigate("/");
     } catch (err) {
-      err.response.data.errors.forEach((errorObj) => {
+      const errors = err.response?.data?.errors;
+
+      if (!Array.isArray(errors)) {
+        console.error(err);
+        return;
+      }
+
+      errors.forEach((errorObj) => {
         if (errorObj.field === "email") {
           setErrorEmail(errorObj.message);
         }
 
         if (errorObj.field === "username") {
-          console.log("printing the errorObj in username", errorObj);
           setErrorUsername(errorObj.message);
           if (Array.isArray(errorObj.suggestions)) {
             setSuggest(errorObj.suggestions);

@@ -48,15 +48,16 @@ export const signUp = async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    //   maxAge: 1 * 24 * 60 * 60 * 1000,
+    // });
 
     res.status(201).json({
       message: "User registered",
+      token,
       user: {
         id: user._id,
         fullName: user.fullName,
@@ -65,9 +66,11 @@ export const signUp = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "server error ", error: err.message });
+    res.status(500).json({ message: "server error ", 
+      error: process.env.NODE_ENV === "development" ? err.message: undefined });
   }
 };
+
 
 export const logIn = async (req, res) => {
   try {
@@ -84,27 +87,32 @@ export const logIn = async (req, res) => {
       expiresIn: "1d",
     });
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-      maxAge: 1 * 24 * 60 * 60 * 1000,
-    });
+    // res.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    //   maxAge: 1 * 24 * 60 * 60 * 1000,
+    // });
 
     res.status(200).json({
       message: "Login successful",
-      user: { id: user._id, username: user.username, email: user.email },
+      token,
+      user:{
+        id:user._id,
+        username:user.username,
+        email:user.email,
+      },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: err.message });
+    res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? err.message : undefined});
   }
 };
 
-export const logOut = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-  });
-  res.status(200).json({ message: "Logged out successfully" });
-};
+// export const logOut = (req, res) => {
+//   res.clearCookie("token", {
+//     httpOnly: true,
+//     secure: process.env.NODE_ENV === "production",
+//     sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+//   });
+//   res.status(200).json({ message: "Logged out successfully" });
+// };

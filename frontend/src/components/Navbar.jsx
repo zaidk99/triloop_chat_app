@@ -10,7 +10,10 @@ import {
   sendRequest,
   fetchRequests,
 } from "../redux/slices/friendsSlice";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
+import { logout } from "../redux/slices/authSlice.js";
+import { tokenUtils } from "../utils/tokenUtils";
 
 const Navbar = () => {
   const username =
@@ -71,18 +74,24 @@ const Navbar = () => {
     setQ(""); // Clear search input
   };
 
+  // const handleLogout = async () => {
+  //   try {
+  //     await axios.post(
+  //       `${import.meta.env.VITE_BASE_URL}/auth/logout`,
+  //       {},
+  //       { withCredentials: true }
+  //     );
+  //     localStorage.removeItem("user");
+  //     navigate("/");
+  //   } catch (err) {
+  //     console.error("Logout failed:", err);
+  //   }
+  // };
+
   const handleLogout = async () => {
-    try {
-      await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/auth/logout`,
-        {},
-        { withCredentials: true }
-      );
-      localStorage.removeItem("user");
-      navigate("/");
-    } catch (err) {
-      console.error("Logout failed:", err);
-    }
+    dispatch(logout());
+    tokenUtils.clearAuth();
+    navigate("/");
   };
 
   const shouldShowCapsuleLinksInDropdown =
@@ -107,7 +116,7 @@ const Navbar = () => {
             type="text"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            onBlur={() => setTimeout(()=> setResults([]) , 150 )}
+            onBlur={() => setTimeout(() => setResults([]), 150)}
             placeholder="Search users..."
             className="w-full px-3 py-1.5 sm:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400 text-sm focus:shadow-md"
           />
@@ -125,15 +134,14 @@ const Navbar = () => {
                       <div className="text-xs text-gray-500">@{u.username}</div>
                     </div>
                     <div>
-                      
-                        <button
-                          onClick={() => navigate(`/chat/${u._id}`)}
-                          className="p-2 rounded hover:bg-gray-100"
-                          title="Message"
-                        >
-                          <FiSend className="text-gray-700" />
-                        </button>
-                     
+                      <button
+                        onClick={() => navigate(`/chat/${u._id}`)}
+                        className="p-2 rounded hover:bg-gray-100"
+                        title="Message"
+                      >
+                        <FiSend className="text-gray-700" />
+                      </button>
+
                       {relation === "none" && (
                         <button
                           onClick={() => onSend(u._id)}

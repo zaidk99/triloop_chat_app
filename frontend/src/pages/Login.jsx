@@ -1,11 +1,13 @@
 import { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { Link, useNavigate } from "react-router-dom";
 import { PiScribbleLoopThin } from "react-icons/pi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { tokenUtils } from "../utils/tokenUtils";
 
 const Login = () => {
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  // const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -25,11 +27,15 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await axios.post(`${BASE_URL}/auth/login`, form, {
-        withCredentials: true,
-      });
-      console.log("Login : ", res.data);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      // const res = await axios.post(`${BASE_URL}/auth/login`, form, {
+      //    withCredentials: true,
+      // });
+  
+      const res = await axiosInstance.post("/auth/login",form);
+
+      // localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      tokenUtils.setAuth(res.data.token , res.data.user);
       setTimeout(() => {
         navigate("/dashboard");
       }, 100);
