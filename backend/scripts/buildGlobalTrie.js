@@ -16,7 +16,7 @@ const text = fs.readFileSync(inputPath, "utf-8");
 
 const trie = new Trie();
 
-// Split into lines/sentences
+// Spliting into lines/sentences
 const sentences = text.split("\n");
 
 for (const sentence of sentences) {

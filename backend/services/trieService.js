@@ -29,7 +29,7 @@ if(fs.existsSync(globalPath)){
         
     } catch (error) {
         console.error("Error loading the global trie");
-        console.log("Skipping wil create new one when messges are sent ");
+        console.log("Skipping will create new one when messges are sent ");
         
     }
 } else {
@@ -78,7 +78,7 @@ export async function insert(roomId, content) {
 
   if (globalTrie) {
     globalTrie.merge(trie);
-    saveGloabalTrie();
+    saveGlobalTrie();
   }
 }
 
@@ -92,7 +92,7 @@ function saveRoomTrie(roomId, trie) {
   );
 }
 
-function saveGloabalTrie() {
+function saveGlobalTrie() {
   const dir = path.join(__dirname, "../data");
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 

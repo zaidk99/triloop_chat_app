@@ -27,6 +27,7 @@ export const useFriendSocketListeners = () => {
       
     };
 
+
     const handleRequestRejected = (data) => {
       console.log("Friend request rejected in real-time:", data);
       dispatch(friendRequestRejected(data));
@@ -41,6 +42,7 @@ export const useFriendSocketListeners = () => {
     socket.on("friend:request-accepted", handleRequestAccepted);
     socket.on("friend:request-rejected", handleRequestRejected);
     socket.on("friend:request-cancelled", handleRequestCancelled);
+
 
     return () => {
       socket.off("friend:request-received", handleRequestReceived);

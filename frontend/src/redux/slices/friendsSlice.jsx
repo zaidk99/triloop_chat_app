@@ -115,7 +115,7 @@ const friendSlice = createSlice({
         state.friends.push({ _id: friendId });
       }
     },
-
+    
     friendRequestRejected: (state, action) => {
       const { requestId } = action.payload;
       // Removing from outgoing requests

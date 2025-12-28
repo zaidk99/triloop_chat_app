@@ -204,6 +204,18 @@ const Navbar = () => {
             className="absolute right-3 top-14 bg-white rounded-2xl p-3 w-48 sm:w-52 sm:text-sm text-xs z-[60] space-y-2 cursor-pointer shadow-[0_10px_25px_rgba(0,0,0,0.65)] transition-transform duration-200 ease-in-out scale-95 origin-top-right"
           >
             <div className="space-y-2">
+              {(!isMdUp || shouldShowCapsuleLinksInDropdown) && (
+                <div className="hover:bg-gray-100 p-2 rounded-lg">
+                  <Link
+                    to="/dashboard"
+                    className="block hover:text-blue-500"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    Hey , {username}
+                  </Link>
+                </div>
+              )}
+
               <div className="hover:bg-gray-100 p-2 rounded-lg">
                 <Link
                   to="/dashboard"

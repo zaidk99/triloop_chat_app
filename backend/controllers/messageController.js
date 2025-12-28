@@ -5,41 +5,12 @@ import User from "../models/User.js";
 import * as trieService from "../services/trieService.js";
 import { tokenize } from "../utils/tokenize.js";
 
-
-// Utility function to create or find DM room between two users .
-// export const getOrCreateDMRoom = async (userId1, userId2) => {
-//   const participants = [userId1, userId2].sort();
-
-//   // find existing Dm room
-//   let room = await Room.findOne({
-//     isDM: true,
-//     participants: { $all: participants },
-//   }).populate("participants", "_id fullName username");
-
-//   if (!room) {
-//     // create new Dm room
-//     room = await Room.create({
-//       name: `DM_${userId1}_${userId2}`,
-//       type: "dm",
-//       isDM: true,
-//       participants: participants,
-//     });
-
-//     // populate the created room
-//     room = await Room.findById(room._id).populate(
-//       "participants",
-//       "_id fullName username"
-//     );
-//   }
-//   return room;
-// };
-
 export const getOrCreateDMRoom = async (userId1, userId2) => {
   if (
     !mongoose.Types.ObjectId.isValid(userId1) ||
     !mongoose.Types.ObjectId.isValid(userId2)
   ) {
-    throw new Error("Inavlid user id's ");
+    throw new Error("Inavlid user ID'S ");
   }
   if (String(userId1) === String(userId2)) {
     throw new Error("Cannot create Dm with self");
@@ -49,7 +20,6 @@ export const getOrCreateDMRoom = async (userId1, userId2) => {
   const participants = [userId1, userId2].sort();
 
   //find existing DM ROOM
-
   let room = await Room.findOne({
     isDM: true,
     participants: { $all: participants },
@@ -140,7 +110,7 @@ export const getRecentChats = async (req, res) => {
   }
 };
 
-// Get /api/messages/:roomId - need to get messages for the specific rooms
+// Get /api/messages/:roomId
 export const getMessages = async (req, res) => {
   try {
     const { roomId } = req.params;
@@ -170,7 +140,6 @@ export const getMessages = async (req, res) => {
 // Post /api/messages/send
 export const sendMessage = async (req, res, io) => {
   try {
-    console.log("sendMessage called" , req.body);
     const { roomId, content } = req.body;
     const senderId = req.userId;
 
@@ -215,7 +184,7 @@ export const sendMessage = async (req, res, io) => {
           ...populatedMessage.toObject(),
           roomId: roomId.toString(),
         });
-        
+
         io.to(roomId.toString()).emit("recent-chat-updated", {
           roomId: roomId.toString(),
           lastMessage: {

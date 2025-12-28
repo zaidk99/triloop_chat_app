@@ -24,7 +24,6 @@ const MessageArea = ({ messages }) => {
       }}
     >
       {messages.map((msg) => {
-        // normalize shape
         const isMe =
           msg.sender === "me" ||
           String(msg.sender) === String(myId) ||

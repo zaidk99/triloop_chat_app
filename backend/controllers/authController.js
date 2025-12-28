@@ -77,7 +77,7 @@ export const logIn = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user)
-      return res.status(400).json({ message: "User not found Please sign up" });
+      return res.status(400).json({ message: "Invalid email or password" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
@@ -104,7 +104,7 @@ export const logIn = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" ? err.message : undefined});
+    res.status(500).json({ message: "Server error", error: process.env.NODE_ENV === "development" && process.env.DEBUG_MODE === "true" ? err.message : undefined });
   }
 };
 
