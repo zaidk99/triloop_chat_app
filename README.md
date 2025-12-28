@@ -52,12 +52,44 @@
     </a>
   </div>
 </div>
-<div style="margin: 30px 0;">
-  <img src="https://github.com/getrecent/shields.io/raw/main/badges/license-mit-blue.svg" alt="MIT License">
-  <img src="https://github.com/getrecent/shields.io/raw/main/badges/react-18-blue.svg" alt="React">
-  <img src="https://github.com/getrecent/shields.io/raw/main/badges/node-18-green.svg" alt="Node.js">
-  <img src="https://github.com/getrecent/shields.io/raw/main/badges/socket.io-red.svg" alt="Socket.io">
+<div style="margin: 30px 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+  <span style="
+    background: #007ec6; 
+    color: white; 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    font-weight: 600;
+  ">MIT License</span>
+  
+  <span style="
+    background: #61DAFB; 
+    color: #000; 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    font-weight: 600;
+  ">React 18</span>
+  
+  <span style="
+    background: #68D391; 
+    color: #000; 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    font-weight: 600;
+  ">Node 18</span>
+  
+  <span style="
+    background: #FF6B6B; 
+    color: white; 
+    padding: 6px 12px; 
+    border-radius: 4px; 
+    font-size: 12px; 
+    font-weight: 600;
+  ">Socket.io</span>
 </div>
+
 
 
 </div>
