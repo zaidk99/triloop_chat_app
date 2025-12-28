@@ -53,12 +53,12 @@
   </div>
 </div>
 <div style="margin: 30px 0;">
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![React](https://img.shields.io/badge/React-18-blue.svg?style=flat-square)](https://react.dev)
-[![Node.js](https://img.shields.io/badge/Node-18-green.svg?style=flat-square)](https://nodejs.org)
-[![Socket.io](https://img.shields.io/badge/Socket.io-red.svg?style=flat-square)](https://socket.io)
-
+  <img src="https://github.com/getrecent/shields.io/raw/main/badges/license-mit-blue.svg" alt="MIT License">
+  <img src="https://github.com/getrecent/shields.io/raw/main/badges/react-18-blue.svg" alt="React">
+  <img src="https://github.com/getrecent/shields.io/raw/main/badges/node-18-green.svg" alt="Node.js">
+  <img src="https://github.com/getrecent/shields.io/raw/main/badges/socket.io-red.svg" alt="Socket.io">
 </div>
+
 
 </div>
 
