@@ -26,11 +26,13 @@ Prerequisites
 
 2 Install dependencies
 
+```bash 
   cd backend
   npm install
 
   cd frontend
   npm install
+```
 
 ⚙️ Environment Variables
 
@@ -38,15 +40,19 @@ Create .env files in both backend and frontend folders.
 
 Backend .env
 
+```bash
    MONGODB_URI= your_mongodb_connection_string
    JWT_SECRET= random_secret_key
    PORT=5000
    NODE_ENV=development
+```
 
  frontend .env
 
+```bash
    VITE_BASE_URL=http://localhost:5000/api
    VITE_SOCKET_URL=http://localhost:5000
+```
 
 
 ▶️ Running the Application
@@ -57,13 +63,20 @@ Start Backend
 
 cd backend
 
-node server.js or nodemon server.js 
-Nodemon is the npm package you can install using npm helps avoid sever restarting repeatedly 
+```bash
 
-Start Frontend (new terminal)
+#  node server.js 
+
+nodemon server.js 
+
+# Nodemon is a development tool that automatically restarts the server when file changes are detected.
+
+# Start Frontend (new terminal)
 
 cd frontend
 npm run dev
+
+```
 
 
 🔌 Core Features
