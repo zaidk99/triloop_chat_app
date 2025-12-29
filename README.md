@@ -19,22 +19,22 @@ Prerequisites
 
 1 Clone the repository
 
-  git clone <repository-url>
-  cd triloop_chat_app
+  • git clone <repository-url>
+  • cd triloop_chat_app
 
 2 Install dependencies
 
-  cd backend
-  npm install
+  • cd backend
+  • npm install
 
-  cd frontend
-  npm install
+  • cd frontend
+  • npm install
 
 ⚙️ Environment Variables
 
 Create .env files in both backend and frontend folders.
 
-  Backend .env
+Backend .env
 
    MONGODB_URI= your_mongodb_connection_string
    JWT_SECRET= random_secret_key
