@@ -9,6 +9,7 @@ It focuses on clean architecture, real-time communication, and secure APIs.
 🚀 Quick Start
 
 Prerequisites
+
 	•	Node.js (v18 or higher)
 	•	MongoDB (local or Atlas)
 	•	npm
@@ -35,12 +36,13 @@ Create .env files in both backend and frontend folders.
 
   Backend .env
 
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_long_random_secret_key
+   MONGODB_URI= your_mongodb_connection_string
+   JWT_SECRET= random_secret_key
    PORT=5000
    NODE_ENV=development
 
  frontend .env
+
    VITE_BASE_URL=http://localhost:5000/api
    VITE_SOCKET_URL=http://localhost:5000
 
@@ -65,22 +67,27 @@ npm run dev
 🔌 Core Features
 
 Authentication
+
 	•	User signup and login
 	•	JWT-based authentication
 	•	Password hashing using bcrypt
+    •   Username availability check with backend-generated suggestions
+
 
 Friends System
+
 	•	Send, accept, reject, and cancel friend requests
 	•	Real-time friend updates via Socket.io
-	•	Search users with relationship status
+	•	Search users
 
 Chat System
+
 	•	One-to-one (DM) chats
-	•	Public chat rooms
 	•	Recent chat tracking
 	•	Real-time message delivery
 
 Message Prediction
+
 	•	Trie-based word suggestions
 	•	Room-specific and global predictions
 	•	Debounced typing (300ms)
@@ -90,10 +97,12 @@ Message Prediction
 🌐 API Overview
 
 Auth
+
 	•	POST /auth/signup
 	•	POST /auth/login
 
 Friends
+
 	•	GET /friends/requests
 	•	GET /friends/list
 	•	POST /friends/request/:userId
@@ -102,6 +111,7 @@ Friends
 	•	GET /friends/search?q=
 
 Messages
+
 	•	GET /messages/recent
 	•	GET /messages/:roomId
 	•	POST /messages/send
@@ -109,12 +119,14 @@ Messages
 	•	POST /messages/room/create
 
 Rooms
+
 	•	POST /rooms/create
 	•	GET /rooms
 
 ⸻
 
 🔄 Real-Time Socket Events
+
 	•	friend:request-received
 	•	friend:request-accepted
 	•	friend:request-rejected
@@ -129,6 +141,7 @@ Rooms
 🛠️ Tech Stack
 
 Frontend
+
 	•	React 18
 	•	Redux Toolkit (RTK Query)
 	•	Tailwind CSS
@@ -138,6 +151,7 @@ Frontend
 	•	Vite
 
 Backend
+
 	•	Node.js
 	•	Express.js
 	•	MongoDB + Mongoose
@@ -147,6 +161,7 @@ Backend
 	•	Custom Trie implementation
 
 🔒 Security
+
 	•	JWT authentication (Bearer tokens)
 	•	bcrypt password hashing
 	•	Input validation on all endpoints
@@ -156,6 +171,7 @@ Backend
 	•	Generic error messages (no sensitive leaks)
 
 ✅ Status
+
 	•	Core chat features completed
 	•	Real-time messaging working
 	•	Trie prediction integrated
