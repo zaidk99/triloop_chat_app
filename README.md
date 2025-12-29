@@ -6,6 +6,15 @@ Triloop is a full-stack (MERN) real-time chat application with friend management
 
 It focuses on clean architecture, real-time communication, and secure APIs.
 
+## 🎥 DEMO 
+
+
+
+https://github.com/user-attachments/assets/3542cdd0-ebac-4511-bf3c-a6dcbdca0c65
+
+
+
+
 ## 🚀 Quick Start
 
 Prerequisites
