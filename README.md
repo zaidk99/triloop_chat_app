@@ -2,7 +2,7 @@
 
 ## Triloop – Real-Time Chat Application
 
-Triloop is a full-stack (mern) real-time chat application with friend management, DM chat rooms, and Trie-based message prediction.
+Triloop is a full-stack (MERN) real-time chat application with friend management, DM chat rooms, and Trie-based message prediction.
 
 It focuses on clean architecture, real-time communication, and secure APIs.
 
@@ -17,14 +17,14 @@ Prerequisites
 
 ## 📦 Installation
 
-1 Clone the repository
+1. Clone the repository
 
 ``` bash
   git clone <repository-url>
   cd triloop_chat_app
 ```
 
-2 Install dependencies
+2. Install dependencies
 
 ```bash 
   cd backend
@@ -36,7 +36,7 @@ Prerequisites
 
 ## ⚙️ Environment Variables
 
-Create .env files in both backend and frontend folders.
+1. Create .env files in both backend and frontend folders.
 
 Backend .env
 
@@ -47,7 +47,7 @@ Backend .env
    NODE_ENV=development
 ```
 
- frontend .env
+frontend .env
 
 ```bash
    VITE_BASE_URL=http://localhost:5000/api
@@ -57,9 +57,9 @@ Backend .env
 
 ## ▶️ Running the Application
 
-open two terminal tabs differently
+1. open two terminal tabs differently
 
-Start Backend
+2. Start Backend
 
 ```bash
 
