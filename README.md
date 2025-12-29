@@ -1,130 +1,168 @@
-<div align="center">
+<div>
 
-<!--- Hero Section --->
-<div style="
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  padding: 60px 20px;
-  border-radius: 20px;
-  margin: 20px 0;
-  color: white;
-  text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-">
-  <h1 style="
-    font-size: 3.5rem;
-    margin: 0;
-    background: linear-gradient(45deg, white, #f8fafc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-  ">
-    🚀 Triloop Chat
-  </h1>
-  
-  <p style="font-size: 1.3rem; margin: 20px 0; opacity: 0.95;">
-    Full-Stack real-time chat platform with <strong>Trie-based predictions</strong>
-  </p>
-  
-  <div style="margin: 30px 0;">
-    <a href="#" style="
-      background: rgba(255,255,255,0.2);
-      color: white;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 0 10px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.3);
-    ">
-      🎮 Live Demo
-    </a>
-    <a href="#quick-start" style="
-      background: rgba(255,255,255,0.9);
-      color: #1e293b;
-      padding: 15px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 0 10px;
-    ">
-      🚀 Get Started
-    </a>
-  </div>
-</div>
-<div style="margin: 30px 0; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-  <span style="
-    background: #007ec6; 
-    color: white; 
-    padding: 6px 12px; 
-    border-radius: 4px; 
-    font-size: 12px; 
-    font-weight: 600;
-  ">MIT License</span>
-  
-  <span style="
-    background: #61DAFB; 
-    color: #000; 
-    padding: 6px 12px; 
-    border-radius: 4px; 
-    font-size: 12px; 
-    font-weight: 600;
-  ">React 18</span>
-  
-  <span style="
-    background: #68D391; 
-    color: #000; 
-    padding: 6px 12px; 
-    border-radius: 4px; 
-    font-size: 12px; 
-    font-weight: 600;
-  ">Node 18</span>
-  
-  <span style="
-    background: #FF6B6B; 
-    color: white; 
-    padding: 6px 12px; 
-    border-radius: 4px; 
-    font-size: 12px; 
-    font-weight: 600;
-  ">Socket.io</span>
-</div>
+Triloop – Real-Time Chat Application
+
+Triloop is a full-stack (mern) real-time chat application with friend management, DM chat rooms, and Trie-based message prediction.
+
+It focuses on clean architecture, real-time communication, and secure APIs.
+
+🚀 Quick Start
+
+Prerequisites
+	•	Node.js (v18 or higher)
+	•	MongoDB (local or Atlas)
+	•	npm
 
 
+📦 Installation
 
-</div>
+1 Clone the repository
 
-## ✨ Features
+  git clone <repository-url>
+  cd triloop_chat_app
 
-<table align="center" style="width: 100%; margin: 40px 0;">
-  <thead>
-    <tr style="background: #f8fafc;">
-      <th style="padding: 20px; text-align: left; border-bottom: 2px solid #e2e8f0;">Feature</th>
-      <th style="padding: 20px; text-align: center; border-bottom: 2px solid #e2e8f0;">Status</th>
-      <th style="padding: 20px; text-align: center; border-bottom: 2px solid #e2e8f0;">Tech</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr style="border-bottom: 1px solid #e2e8f0;">
-      <td style="padding: 20px;"><strong>🔐 JWT Authentication</strong><br>Secure login/signup with bcrypt</td>
-      <td style="padding: 20px; text-align: center;">
-        <span style="background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600;">✅ Live</span>
-      </td>
-      <td style="padding: 20px; text-align: center;">JWT + bcrypt</td>
-    </tr>
-    <tr style="border-bottom: 1px solid #e2e8f0;">
-      <td style="padding: 20px;"><strong>👥 Real-time Friends</strong><br>Send/accept friend requests instantly</td>
-      <td style="padding: 20px; text-align: center;">
-        <span style="background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600;">✅ Live</span>
-      </td>
-      <td style="padding: 20px; text-align: center;">Socket.io</td>
-    </tr>
-    <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
-      <td style="padding: 20px;"><strong>🤖 Trie Predictions</strong><br>Smart next-word suggestions</td>
-      <td style="padding: 20px; text-align: center;">
-        <span style="background: #10b981; color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600;">✅ Live</span>
-      </td>
-      <td style="padding: 20px; text-align: center;">Custom Trie</td>
-    </tr>
-  </tbody>
-</table>
+2 Install dependencies
+
+  cd backend
+  npm install
+
+  cd frontend
+  npm install
+
+⚙️ Environment Variables
+
+Create .env files in both backend and frontend folders.
+
+  Backend .env
+
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_long_random_secret_key
+   PORT=5000
+   NODE_ENV=development
+
+ frontend .env
+   VITE_BASE_URL=http://localhost:5000/api
+   VITE_SOCKET_URL=http://localhost:5000
+
+
+▶️ Running the Application
+
+open two terminal tabs differently
+
+Start Backend
+
+cd backend
+
+node server.js or nodemon server.js 
+Nodemon is the npm package you can install using npm helps avoid sever restarting repeatedly 
+
+Start Frontend (new terminal)
+
+cd frontend
+npm run dev
+
+
+🔌 Core Features
+
+Authentication
+	•	User signup and login
+	•	JWT-based authentication
+	•	Password hashing using bcrypt
+
+Friends System
+	•	Send, accept, reject, and cancel friend requests
+	•	Real-time friend updates via Socket.io
+	•	Search users with relationship status
+
+Chat System
+	•	One-to-one (DM) chats
+	•	Public chat rooms
+	•	Recent chat tracking
+	•	Real-time message delivery
+
+Message Prediction
+	•	Trie-based word suggestions
+	•	Room-specific and global predictions
+	•	Debounced typing (300ms)
+
+⸻
+
+🌐 API Overview
+
+Auth
+	•	POST /auth/signup
+	•	POST /auth/login
+
+Friends
+	•	GET /friends/requests
+	•	GET /friends/list
+	•	POST /friends/request/:userId
+	•	POST /friends/respond/:requestId
+	•	POST /friends/cancel/:requestId
+	•	GET /friends/search?q=
+
+Messages
+	•	GET /messages/recent
+	•	GET /messages/:roomId
+	•	POST /messages/send
+	•	GET /messages/:roomId/predict
+	•	POST /messages/room/create
+
+Rooms
+	•	POST /rooms/create
+	•	GET /rooms
+
+⸻
+
+🔄 Real-Time Socket Events
+	•	friend:request-received
+	•	friend:request-accepted
+	•	friend:request-rejected
+	•	friend:request-cancelled
+	•	friend:added
+	•	receive-message
+	•	recent-chat-updated
+	•	user-joined
+
+⸻
+
+🛠️ Tech Stack
+
+Frontend
+	•	React 18
+	•	Redux Toolkit (RTK Query)
+	•	Tailwind CSS
+	•	React Router DOM
+	•	Socket.io Client
+	•	Axios
+	•	Vite
+
+Backend
+	•	Node.js
+	•	Express.js
+	•	MongoDB + Mongoose
+	•	Socket.io
+	•	JWT Authentication
+	•	bcrypt
+	•	Custom Trie implementation
+
+🔒 Security
+	•	JWT authentication (Bearer tokens)
+	•	bcrypt password hashing
+	•	Input validation on all endpoints
+	•	NoSQL injection prevention
+	•	Rate limiting on prediction endpoint
+	•	Sanitized responses
+	•	Generic error messages (no sensitive leaks)
+
+✅ Status
+	•	Core chat features completed
+	•	Real-time messaging working
+	•	Trie prediction integrated
+	•	Secure and production-ready structure
+
+⚠️ Important Note
+
+Never commit .env files or secrets to the repository.
+Always keep environment variables private and listed in .gitignore.
+
