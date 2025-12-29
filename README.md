@@ -1,12 +1,12 @@
 <div>
 
-Triloop – Real-Time Chat Application
+## Triloop – Real-Time Chat Application
 
 Triloop is a full-stack (mern) real-time chat application with friend management, DM chat rooms, and Trie-based message prediction.
 
 It focuses on clean architecture, real-time communication, and secure APIs.
 
-🚀 Quick Start
+## 🚀 Quick Start
 
 Prerequisites
 
@@ -15,7 +15,7 @@ Prerequisites
 	•	npm
 
 
-📦 Installation
+## 📦 Installation
 
 1 Clone the repository
 
@@ -34,7 +34,7 @@ Prerequisites
   npm install
 ```
 
-⚙️ Environment Variables
+## ⚙️ Environment Variables
 
 Create .env files in both backend and frontend folders.
 
@@ -55,21 +55,24 @@ Backend .env
 ```
 
 
-▶️ Running the Application
+## ▶️ Running the Application
 
 open two terminal tabs differently
 
 Start Backend
 
-cd backend
-
 ```bash
+
+cd backend
 
 #  node server.js 
 
 nodemon server.js 
 
-# Nodemon is a development tool that automatically restarts the server when file changes are detected.
+# Nodemon is an npm package that automatically restarts the server during development when code changes.
+# Install Nodemon as a development dependency in the project root directory.
+# npm install --save-dev nodemon
+
 
 # Start Frontend (new terminal)
 
@@ -79,7 +82,7 @@ npm run dev
 ```
 
 
-🔌 Core Features
+## 🔌 Core Features
 
 Authentication
 
@@ -109,7 +112,7 @@ Message Prediction
 
 ⸻
 
-🌐 API Overview
+## 🌐 API Overview
 
 Auth
 
@@ -140,7 +143,7 @@ Rooms
 
 ⸻
 
-🔄 Real-Time Socket Events
+## 🔄 Real-Time Socket Events
 
 	•	friend:request-received
 	•	friend:request-accepted
@@ -153,9 +156,9 @@ Rooms
 
 ⸻
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-Frontend
+## Frontend
 
 	•	React 18
 	•	Redux Toolkit (RTK Query)
@@ -165,7 +168,7 @@ Frontend
 	•	Axios
 	•	Vite
 
-Backend
+## Backend
 
 	•	Node.js
 	•	Express.js
@@ -175,7 +178,7 @@ Backend
 	•	bcrypt
 	•	Custom Trie implementation
 
-🔒 Security
+## 🔒 Security
 
 	•	JWT authentication (Bearer tokens)
 	•	bcrypt password hashing
@@ -185,12 +188,19 @@ Backend
 	•	Sanitized responses
 	•	Generic error messages (no sensitive leaks)
 
-✅ Status
+## ✅ Status
 
 	•	Core chat features completed
 	•	Real-time messaging working
 	•	Trie prediction integrated
 	•	Secure and production-ready structure
+
+## 🚧 In Development
+
+    •   Public chat rooms
+    •   Community chat groups
+    •   Voice and video calling
+    •   Message attachments (images, files)
 
 ⚠️ Important Note
 
