@@ -73,12 +73,13 @@ nodemon server.js
 # Install Nodemon as a development dependency in the project root directory.
 # npm install --save-dev nodemon
 
+```
 
-# Start Frontend (new terminal)
+3. Start Frontend (new terminal)
 
+```bash
 cd frontend
 npm run dev
-
 ```
 
 
